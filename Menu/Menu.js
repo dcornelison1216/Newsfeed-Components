@@ -40,7 +40,13 @@ const createMenu = (array) => {
 
   // Step 4: add a click event listener to the menu button. When clicked it should toggle the class 'menu--open' on the menu (your div with a 'menu' class).
   menuButton.addEventListener('click', () => {
-    menu.classList.toggle('menu--open')
+    if(menu.style.width == '0px') {
+      menu.style.width = '350px'
+      menu.style.opacity = '1'
+    } else if (menu.style.width == '350px') {
+      menu.style.width = '0px'
+      menu.style.opacity = '0'
+    }
   })
 
   // Step 5: return the menu component.
@@ -50,3 +56,19 @@ const createMenu = (array) => {
   // Step 6: add the menu component to the DOM.
 const header = document.querySelector('.header')
 header.appendChild(createMenu(menuItems))
+
+// nav menu display changes
+const menu = document.querySelector('.menu')
+menu.style.display = 'block'
+menu.style.width = '0px'
+menu.style.opacity = '0'
+
+// nav menu transition effects
+menu.style.transition = '.5s'
+menu.style.whiteSpace = 'nowrap'
+
+// make the menu slide back out when the user clicks anywhere on the screen besides the menu
+header.addEventListener('mouseleave', () => {
+  menu.style.width = '0px'
+  menu.style.opacity = '0'
+})
