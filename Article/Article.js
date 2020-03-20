@@ -37,9 +37,9 @@ const data = [
         mewing kittens Remus Lupin. Palominos scarlet train black robes, Metamorphimagus Niffler dead easy second bedroom. Padma
         and Parvati Sorting Hat Minister of Magic blue turban remember my last.`,
 
-    thirdParagraph: `Toad-like smile Flourish and Blotts he knew I’d come back Quidditch World Cup. Fat Lady baubles banana fritters fairy lights 
-        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven 
-        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot 
+    thirdParagraph: `Toad-like smile Flourish and Blotts he knew I’d come back Quidditch World Cup. Fat Lady baubles banana fritters fairy lights
+        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven
+        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot
         sing above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix tears good clean match.`
   },
   {
@@ -66,8 +66,8 @@ const data = [
         consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
         sit amet, consectetur adipiscing elit. Nidoking Lorem ipsum`,
 
-    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
-        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
+    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel
+        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James
         Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
   },
   {
@@ -85,11 +85,19 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  //Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+  {
+    title: 'Learn to Code From Home',
+    date: 'March 17, 2020',
+    firstParagraph: 'Bacon ipsum dolor amet beef fatback salami buffalo chicken venison ham hock pork boudin jowl frankfurter tri-tip cow. Capicola andouille pastrami, meatball filet mignon ball tip bacon. Chicken rump andouille beef ribs tail cupim, turducken buffalo chuck burgdoggen short ribs tri-tip kielbasa. Corned beef ham hock strip steak salami. Bacon salami doner, drumstick landjaeger hamburger chuck kevin flank fatback beef ribs meatloaf frankfurter corned beef brisket.',
+    secondParagraph: 'Andouille ham hock prosciutto swine. Prosciutto boudin landjaeger buffalo ham kielbasa meatloaf short ribs drumstick sirloin. Short ribs biltong pork loin, pastrami pancetta turkey bresaola rump tri-tip jerky tenderloin alcatra ham boudin buffalo. Bresaola shoulder ham, ribeye cow short loin venison kielbasa turducken meatloaf jowl buffalo chicken. Capicola spare ribs pancetta ham hock ground round jerky kielbasa frankfurter t-bone. Shoulder ham meatloaf drumstick venison.',
+    thirdParagraph: 'Hamburger sirloin turkey, burgdoggen pork belly beef ribs frankfurter ribeye pastrami short loin bacon landjaeger ham. Ball tip tail spare ribs drumstick. Ham swine chislic fatback, picanha filet mignon sirloin chuck bacon frankfurter salami. Tri-tip meatloaf prosciutto jowl ham hock. Corned beef pork chop salami landjaeger shankle tail swine tongue frankfurter spare ribs buffalo alcatra. Sirloin cow shank frankfurter pork filet mignon.'
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
-  
+/* Step 1: Create a function that creates a component. You will want your component to look like the template below:
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -112,3 +120,65 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+const createComponent = (obj) => {
+  // create article elements
+  const article = document.createElement('div')
+  article.classList.add('article')
+  const title = document.createElement('h2')
+  const date = document.createElement('p')
+  date.classList.add('date')
+  const contentDiv = document.createElement('div')
+  const paraOne = document.createElement('p')
+  const paraTwo = document.createElement('p')
+  const paraThree = document.createElement('p')
+  const button = document.createElement('span')
+  button.classList.add('expandButton')
+
+  // add elements to layout structure
+  article.appendChild(title)
+  article.appendChild(date)
+  article.appendChild(contentDiv)
+  contentDiv.appendChild(paraOne)
+  contentDiv.appendChild(paraTwo)
+  contentDiv.appendChild(paraThree)
+  article.appendChild(button)
+
+  // Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  button.addEventListener('click', () => {
+    article.classList.toggle('article-open')
+  })
+
+  title.textContent = obj.title
+  date.textContent = obj.date
+  paraOne.textContent = obj.firstParagraph
+  paraTwo.textContent = obj.secondParagraph
+  paraThree.textContent = obj.thirdParagraph
+
+  // Step 3: return the entire component.
+  return article
+}
+
+  // Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+const articlesDiv = document.querySelector('.articles')
+
+data.forEach(obj => {
+  articlesDiv.appendChild(createComponent(obj))
+})
+
+// make the expand button visible/usable
+const buttonList = document.querySelectorAll('.expandButton')
+buttonList.forEach(btn => {
+  btn.style = 'width: 20px; height: 20px; border-radius: 10px; background: lightgray; text-align: center; padding-top: 5px'
+  btn.textContent = '\u25bc'
+})
+
+// change expand button arrow when it opens/closes
+buttonList.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(btn.textContent == '\u25bc') {
+      btn.textContent = '\u25b2'
+    } else if (btn.textContent == '\u25b2') {
+      btn.textContent = '\u25bc'
+    }
+  })
+})
